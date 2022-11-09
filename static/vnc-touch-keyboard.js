@@ -27,8 +27,6 @@ const UI = {
     },
 
     keyInput(event) {
-        console.log('Sieg');
-
         if (!rfb) return;
     
         const newValue = event.target.value;
