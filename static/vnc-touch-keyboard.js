@@ -141,10 +141,3 @@ function toggleVirtualKeyboard() {
     }
 }
 
-document.onload = () => {
-    if (window.isTouchDevice) {
-        document.getElementById('noVNC_keyboard_button').style.display = "inline-block";
-    }
-};
-
-

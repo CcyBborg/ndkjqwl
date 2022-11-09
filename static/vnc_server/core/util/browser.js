@@ -17,10 +17,14 @@ export let isTouchDevice = ('ontouchstart' in document.documentElement) ||
                                  // required for MS Surface
                                  (navigator.maxTouchPoints > 0) ||
                                  (navigator.msMaxTouchPoints > 0);
+if (isTouchDevice) {
+    document.getElementById('noVNC_keyboard_button').style.display = "inline-block";
+}
 window.isTouchDevice = isTouchDevice;
 window.addEventListener('touchstart', function onFirstTouch() {
     isTouchDevice = true;
     window.isTouchDevice = true;
+    document.getElementById('noVNC_keyboard_button').style.display = "inline-block";
     window.removeEventListener('touchstart', onFirstTouch, false);
 }, false);
 
