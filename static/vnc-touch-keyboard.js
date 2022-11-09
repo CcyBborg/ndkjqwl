@@ -115,11 +115,7 @@ const UI = {
     },
 
     hideVirtualKeyboard() {
-        if (!isTouchDevice) return;
-
         const input = document.getElementById('noVNC_keyboardinput');
-
-        if (document.activeElement != input) return;
 
         document.getElementById('noVNC_keyboard_button')
         .classList.remove("noVNC_selected");
