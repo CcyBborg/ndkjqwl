@@ -87,25 +87,6 @@ const UI = {
             UI.lastKeyboardinput = newValue;
         }
     },
-
-    onfocusVirtualKeyboard(event) {
-        console.log('SIEEEG');
-        console.log(document.getElementById('noVNC_keyboard_button'));
-        document.getElementById('noVNC_keyboard_button')
-            .classList.add("noVNC_selected");
-        if (rfb) {
-            rfb.focusOnClick = false;
-        }
-    },
-    
-    onblurVirtualKeyboard(event) {
-        console.log('WTF');
-        document.getElementById('noVNC_keyboard_button')
-            .classList.remove("noVNC_selected");
-        if (rfb) {
-            rfb.focusOnClick = true;
-        }
-    },
     
     keyEvent(keysym, code, down) {
         if (!rfb) return;
@@ -121,22 +102,20 @@ const UI = {
         document.getElementById("noVNC_keyboardinput")
                 .addEventListener('input', UI.keyInput);
         document.getElementById("noVNC_keyboardinput")
-                .addEventListener('focus', UI.onfocusVirtualKeyboard);
-        document.getElementById("noVNC_keyboardinput")
-                .addEventListener('blur', UI.onblurVirtualKeyboard);
-        document.getElementById("noVNC_keyboardinput")
                 .addEventListener('submit', () => false);
         touchKeyboard._target.focus();
+        document.getElementById('noVNC_keyboard_button')
+        .classList.add("noVNC_selected");
     },
 
     hideVirtualKeyboard() {
         if (!isTouchDevice) return;
 
-        const input = document.getElementById('noVNC_keyboardinput');
-
-        if (document.activeElement != input) return;
-
-        input.blur();
+        document.getElementById('noVNC_keyboard_button')
+        .classList.remove("noVNC_selected");
+        if (rfb) {
+            rfb.focusOnClick = true;
+        }
     },
 };
 
