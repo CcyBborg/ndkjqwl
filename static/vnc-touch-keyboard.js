@@ -27,6 +27,7 @@ const UI = {
     },
 
     keyInput(event) {
+        console.log('Sieg');
 
         if (!rfb) return;
     
@@ -88,6 +89,8 @@ const UI = {
     },
 
     onfocusVirtualKeyboard(event) {
+        console.log('SIEEEG');
+        console.log(document.getElementById('noVNC_keyboard_button'));
         document.getElementById('noVNC_keyboard_button')
             .classList.add("noVNC_selected");
         if (rfb) {
@@ -96,6 +99,7 @@ const UI = {
     },
     
     onblurVirtualKeyboard(event) {
+        console.log('WTF');
         document.getElementById('noVNC_keyboard_button')
             .classList.remove("noVNC_selected");
         if (rfb) {
@@ -113,6 +117,7 @@ const UI = {
         touchKeyboard = new rfb._keyboard.constructor(document.getElementById('noVNC_keyboardinput'));
         touchKeyboard.onkeyevent = UI.keyEvent;
         touchKeyboard.grab();
+        console.log(touchKeyboard);
         document.getElementById("noVNC_keyboardinput")
                 .addEventListener('input', UI.keyInput);
         document.getElementById("noVNC_keyboardinput")
@@ -121,6 +126,7 @@ const UI = {
                 .addEventListener('blur', UI.onblurVirtualKeyboard);
         document.getElementById("noVNC_keyboardinput")
                 .addEventListener('submit', () => false);
+        touchKeyboard._target.focus();
     },
 
     hideVirtualKeyboard() {
@@ -139,6 +145,7 @@ function toggleVirtualKeyboard() {
         .classList.contains("noVNC_selected")) {
         UI.hideVirtualKeyboard();
     } else {
+        console.log('SHOW');
         UI.showVirtualKeyboard();
     }
 }

@@ -11,7 +11,7 @@
 </script>
 
 <style>
-    #noVNC_keyboardinput {
+#noVNC_keyboardinput {
   width: 1px;
   height: 1px;
   background-color: #fff;
@@ -44,9 +44,9 @@
             <div id="screen" class="vnc_background_disabler"
                  style="height: 100%; width: 100%; padding-right: 7px; display: none">
                 <!-- This is where the remote screen will appear -->
-                <textarea id="noVNC_keyboardinput" autocapitalize="off"
-            autocomplete="off" spellcheck="false" tabindex="-1" class=""></textarea>
             </div>
+            <textarea id="noVNC_keyboardinput" autocapitalize="off"
+            autocomplete="off" spellcheck="false" tabindex="-1"></textarea>
 
         </div>
     </div>
@@ -62,8 +62,8 @@
         </v-btn>
     </div> -->
 
-    <v-btn id="noVNC_keyboard_button" style="background: rgb(89,189,89); width: 108px; font-weight: 600; margin: 0 10px; z-index: 9999; color: white"
+    <button id="noVNC_keyboard_button" style="background: rgb(89,189,89); width: 108px; font-weight: 600; margin: 0 10px; z-index: 9999; color: white"
     onclick="toggleVirtualKeyboard()">
         Клавиатура
-    </v-btn>
+</button>
 </div>

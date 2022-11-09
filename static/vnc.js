@@ -107,7 +107,7 @@ if (port) {
 
 var appData = $('#app-data').data();
 // url += '/ws/vnc/' + appData.uniquecode;
-url = 'wss://activations.ddostup.ru/ws/vnc/1411907034242216370';
+url = 'wss://activations.ddostup.ru/ws/vnc/5039885458764738086';
 
 // url = 'wss://activations.ddostup.ru/ws/vnc/18290543483979400602';
 
