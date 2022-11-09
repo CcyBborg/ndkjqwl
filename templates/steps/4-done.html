@@ -1,0 +1,48 @@
+<script
+        type="module"
+        src="./static/poof.js">
+</script>
+
+
+<div class="text-info">
+    <div class="header-content">
+
+
+        <div v-if="state.service_name === 'yt'">
+            <p style="margin-bottom: 18px">Приглашение было успешно отправлено вам на почту.<br/>
+                Воспользуйтесь <a href="https://telegra.ph/how-to-yt-10-29"
+                                  target=”_blank” style="color: #e3bcff">
+                    инструкцией по активации YouTube Premium</a>.
+            </p>
+        </div>
+        <div v-if="state.service_name === 'spoty'">
+            <p style="margin-bottom: 18px">Подписка была успешно активирована на ваш аккаунт.</p>
+        </div>
+
+
+        <p style="margin-top: 40px">
+            <b>Полезные ссылки:</b>
+        </p>
+        <p>
+            ⭐ Новости, продления, скидки — вступайте в наш <a href="https://t.me/+fcBWySwYq8w4ODNi"
+                                                              target=”_blank” style="color: #e3bcff">телеграм
+            чат</a>.
+        </p>
+
+        <!--        <div v-if="state.service_name === 'yt'">-->
+        <div>
+            <p style="margin: 0">
+                🔄 Подключите автоматическое продление подписки
+                <a href="https://ddostup.ru" target="_blank" style="color: #e3bcff">
+                    на нашем сайте</a>.
+            </p>
+        </div>
+        <!--                <div class="d-grid d-md-block text-center">-->
+        <!--                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#checkout">-->
+        <!--                        Подключить-->
+        <!--                    </button>-->
+        <!--                </div>-->
+        <!--        </div>-->
+
+    </div>
+</div>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <title>Дай Доступ! — активируем подписку</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <!-- Blender pro font -->
+    <link href="static/fonts/stylesheet.css" rel="stylesheet" type="text/css">
+    <link href="static/fonts/proxima-nova.css" rel="stylesheet" type="text/css">
+
+
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./static/styles.css"/>
+
+    <meta id="app-data" data-uniquecode="{{{uniquecode}}}">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">-->
+
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+<script
+        type="module"
+        src="./static/app.js">
+</script>
+
+
+
+
+<body>
+<main>
+    <section class="header">
+        <div id="app">
+            <app uniquecode="{{{ uniquecode }}}">
+                <template v-slot="{ post, state, loading }">
+
+                    <div v-if="!loading && ['started', 'vnc', 'done', 'error'].includes(state.processing_status)">
+                        <v-app class="" style="background: none;">
+                            <div class="container" style="margin: 5vh auto;">
+                                <h1 v-if="state.processing_status === 'started'" style="margin: 0">Активация
+                                    запущена</h1>
+                                <h1 v-if="state.processing_status === 'vnc'" style="margin: 0">Войдите в аккаунт</h1>
+                                <h1 v-if="state.processing_status === 'done'" style="margin: 0">Поздравляем!</h1>
+                                <h1 v-if="state.processing_status === 'error'" style="margin: 0">Произошла ошибка</h1>
+                                <div style="margin: 12px 0 0 0; width: 100%">
+                                    <p style="align-self: flex-start; margin-bottom: 5px; font-weight: 500">
+                                        {{ state.progress }}%</p>
+                                    <v-progress-linear
+                                            v-model="state.progress"
+                                            height="8"
+                                            :color="`${state.progress_color}`"
+                                    ></v-progress-linear>
+                                </div>
+
+                                <div class="activation-content">
+
+                                    <div v-if="state.processing_status === 'started'">
+                                        {% include 'steps/1-started.html' %}
+                                    </div>
+                                    <div v-if="state.processing_status === 'vnc'"
+                                         style="width: 100%; height: 100%;
+                                                margin-top: 10px;
+                                                display: flex;
+                                                align-items: center; justify-content: center">
+                                        {% include 'steps/2-vnc.html' %}
+                                    </div>
+                                    <div v-if="state.processing_status === 'error'">
+                                        {% include 'steps/3-error.html' %}
+                                    </div>
+                                    <div v-if="state.processing_status === 'done'">
+                                        {% include 'steps/4-done.html' %}
+                                    </div>
+
+                                </div>
+
+
+                                <!--                        <v-btn-->
+                                <!--                                @click="post('/test_api/')"-->
+                                <!--                                elevation="2"-->
+
+                                <!--                        >-->
+                                <!--                            <span>Обычная кнопка</span>-->
+                                <!--                        </v-btn>-->
+
+                                <!--                                <p style="margin-top: 20px">{{state}}</p>-->
+
+
+                                <a href="https://t.me/kingOfSubs" target=”_blank”
+                                   style="text-decoration: none; margin-top: 20px">
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center">
+                                        <v-btn style="background: rgb(200, 200, 200)">
+                                            Написать в поддержку
+                                        </v-btn>
+                                        <p style="margin: 7px 0; font-size: 14px">работаем c 08:00 до 23:00 [GMT+3]</p>
+                                        {%include "links.html"%}
+                                    </div>
+                                </a>
+                            </div>
+                        </v-app>
+                    </div>
+                    <div v-else>
+                        <div class="container" style="position: absolute; top: 50%;
+                                                        left: 50%;
+                                                        transform: translate(-50%, -50%);">
+                            <div style="height: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center">
+                                <div class="loader-03"></div>
+                                <h1>Запуск</h1>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </app>
+        </div>
+    </section>
+</main>
+
+
+<!-- Yandex.Metrika counter -->
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/90332341" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Дай Доступ! — активируем подписку</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <!-- Blender pro font -->
+    <link href="fonts/stylesheet.css" rel="stylesheet" type="text/css">
+    <link href="fonts/proxima-nova.css" rel="stylesheet" type="text/css">
+
+
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <style>
+        @keyframes float {
+            0% {
+                transform: translatey(0px);
+            }
+
+            50% {
+                transform: translatey(-10px);
+            }
+
+            100% {
+                transform: translatey(0px);
+            }
+        }
+
+        .container {
+            /*padding: 0 34px;*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .modal-content {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 0;
+            color: #4D4D4D;
+            min-height: 100vh;
+        }
+
+        .modal-content p {
+            color: #4D4D4D !important;
+            font-size: 18px;
+        }
+
+        .modal-dialog {
+            margin: 0;
+            max-width: none;
+        }
+
+        .modal-header {
+            border-bottom: none;
+            position: sticky;
+            top: 30px;
+        }
+
+        .modal-header .btn-close-white {
+            font-size: 30px;
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+            border-radius: 50%;
+            align-self: flex-start;
+            margin-top: 30px;
+            background-color: rgba(0, 0, 0, .2);
+        }
+
+        dl {
+            font-size: 20px;
+        }
+
+        body {
+            color: #fff;
+            font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            /* background: linear-gradient(168.18deg, #614385 -0.85%, #516395 100.85%); */
+            background-color: #19191c;
+        }
+
+        .form-check {
+            padding-left: 2.5em;
+        }
+
+        .form-check .form-check-input {
+            width: 1.6em;
+            height: 1.6em;
+            margin-left: -2.5em;
+        }
+
+        main {
+            overflow: hidden;
+        }
+
+        body,
+        main,
+        .header {
+            display: flow-root;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 600;
+            font-family: 'Blender Pro', Helvetica, sans-serif;
+        }
+
+        h1 {
+            font-size: 59px;
+            line-height: 70px;
+        }
+
+        h2 {
+            font-size: 66px;
+            line-height: 68px;
+        }
+
+        p {
+            color: #fff !important;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        .header {
+            min-height: 100vh;
+            position: relative;
+            overflow: visible;
+        }
+
+        @-webkit-keyframes example {
+            0% {
+                -webkit-transform: rotate(37deg);
+                transform: rotate(37deg)
+            }
+
+            to {
+                -webkit-transform: rotate(42deg);
+                transform: rotate(42deg)
+            }
+        }
+
+        .header::before {
+            position: absolute;
+            z-index: -1;
+            top: -40%;
+            right: -125%;
+            opacity: .4;
+            width: 350%;
+            height: 350%;
+            content: "";
+            background: radial-gradient(rgba(25, 25, 28, 0) 50%, #19191c 80%), conic-gradient(#614385 0, #19191c 15.2%, #19191c 18.2%, #516395, 20.5%, #19191c 30.2%, #19191c 50%, #283968 56.5%, #516395 59.4%, #060551 66.2%, #101057 72.9%, #242473 85.1%, #516395 89.1%, #283968 90.6%, #19191c 93.7%, #614385 100%);
+            -webkit-animation-name: example;
+            animation-name: example;
+            -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+
+        .header ul {
+            padding: 0;
+            font-weight: 600;
+        }
+
+        .header .bi-chevron-double-down {
+            background-color: transparent;
+            color: rgba(255, 255, 255, 0.21);
+            position: absolute;
+            bottom: 0;
+            margin: 0 auto;
+            font-size: 70px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            transform: translatey(0px);
+            animation: float 1.5s ease-in-out infinite;
+        }
+
+        .header .btn {
+            margin-top: calc(100vh - 714px);
+        }
+
+        .subscription-img {
+            filter: drop-shadow(0px 3.13654px 3.13654px rgba(0, 0, 0, 0.25));
+        }
+
+        .subscription-title {
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 1.2;
+            white-space: nowrap;
+            text-align: left;
+            justify-content: flex-start;
+        }
+
+        .subscription-price {
+            font-weight: 500;
+            font-size: 20px;
+            text-align: left;
+        }
+
+        .btn {
+            border: 5px solid #F6AB19;
+            border-radius: 21px;
+            padding: 8px 60px;
+        }
+
+        .btn-primary {
+            backdrop-filter: blur(4px);
+            color: #fff;
+            /*background: rgba(255, 255, 255, 0.21);*/
+            background: #323232;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #4D4D4D;
+        }
+
+        .btn.btn-primary:hover {
+            background: rgba(94, 94, 94, 0.77);
+            /*background: */
+            border: 5px solid #F6AB19;
+        }
+
+        .btn-lg {
+            font-weight: 600;
+            font-size: 25px;
+            line-height: 45px;
+            padding: 10px 80px;
+        }
+
+        .features {
+            margin: 5% 0 10% 0;
+        }
+
+        .features p {
+            max-width: 260px;
+            margin: 0;
+        }
+
+        .features-icon-wrapper {
+            background: rgba(0, 0, 0, 0.27);
+            /*border: 1px solid rgba(255, 255, 255, 0.52);*/
+            box-shadow: 0px 0px 7px 0px #e0cfffdb;
+            border-radius: 21.4072px;
+            width: 91.75px;
+            height: 90.52px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            padding: 20px 0;
+            border-radius: 25px 25px 0px 0px;
+            background: rgba(242, 242, 242, 0.8);
+            color: #535353;
+        }
+
+        footer p,
+        footer a {
+            color: #535353 !important;
+            font-size: 10px;
+            line-height: 14px;
+        }
+
+        .logo-wrapper {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid #FFFFFF;
+            border-radius: 30.3529px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-title {
+            margin: 5% 0 10%;
+        }
+
+        .about-p {
+            font-size: 20px;
+            line-height: 26px;
+        }
+
+        .title-p {
+            font-size: 21px;
+            line-height: 39px;
+        }
+
+        .tab-pane {
+            background-color: #FFFFFF;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            padding: 16px;
+            z-index: 999;
+            margin-top: 24px;
+            position: relative;
+        }
+
+        .nav.nav-tabs {
+            border-bottom: none;
+        }
+
+        .nav-tabs .nav-link {
+            background: rgba(22, 22, 22, 0.53);
+            border-radius: 20px;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: rgba(211, 211, 211, 0.27);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .nav-tabs .nav-link.active::after {
+            content: "";
+            background-image: url(./icons/triangle.svg);
+            background-size: contain;
+            position: absolute;
+            bottom: -40px;
+            width: 37px;
+            height: 34px;
+            overflow: visible;
+        }
+
+        input.form-control {
+            background: #D9D9D9;
+            border-radius: 10px;
+        }
+
+        p.choose-service-title {
+            margin: 50px 0 30px;
+            text-align: center;
+            color: #fff !important;
+        }
+
+        p.subscription-form-caption {
+            text-align: center;
+            color: #A5A3A3 !important;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 13px;
+        }
+
+        p.subscription-form-caption a {
+            color: #A5A3A3 !important;
+            font-weight: 600;
+        }
+
+        .header-title {
+            margin: 15vh 0 5vh;
+            text-align: center;
+        }
+
+        .footer-links li {
+            margin-bottom: -5px;
+        }
+
+        .accordion {
+            width: 100%;
+            background-color: transparent;
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 20px;
+            background-color: transparent;
+        }
+
+        .accordion-button {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 29px;
+            border-radius: 20px !important;
+            box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+        }
+
+        .accordion-body {
+            color: #fff;
+        }
+
+
+        .form-check-input:checked {
+            background-color: #F6AB19;
+            border-color: #F6AB19;
+        }
+
+        @media (max-width: 600px) {
+            p {
+                font-size: 18px;
+            }
+
+
+            .about-p {
+                font-size: 18px;
+                line-height: 24px;
+            }
+
+            .modal-header {
+                position: relative;
+            }
+        }
+
+        @media (max-width: 388px) {
+
+        }
+
+        @media (min-width: 760px) {
+            dl {
+                font-size: 24px;
+            }
+
+            .header-title {
+                margin: 0;
+            }
+
+            .header .btn {
+                margin-top: calc(30vh - 266px);
+            }
+
+            .header-content {
+                /*margin: 30vh 0 20vh;*/
+                /*display: flex;*/
+                /*justify-content: space-between;*/
+                /*align-items: center;*/
+            }
+
+            .title-p {
+                font-size: 22px !important;
+            }
+
+            .container {
+                max-width: 880px;
+            }
+
+            h1 {
+                font-size: 80px;
+            }
+
+            .tab-pane {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<main>
+    <section class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>Активация</h1>
+                    <p class="m-0" style="text-align: center; line-height: 27px">пожалуйста подождите одну минуту...</p>
+                    <p class="m-0"
+                       style="text-align: center;
+                    background: rgba(68,68,68,0.49); padding: 8px 20px; border-radius: 12px; line-height: 1.2; margin-top: 16px !important;">
+                        Поддержка доступна c 08:00 до 23:00 [GMT+3]<br/>
+                        <a href="https://t.me/kingOfSubs" target=”_blank” style="color: #e3bcff">Телеграм</a> или
+                        <a href="https://oplata.info" target=”_blank” style="color: #e3bcff">Страница покупки</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+    setTimeout(function(){
+        window.location.reload(1);
+    }, 10000);
+</script>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === r) {
+                return;
+            }
+        }
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(90332341, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+    });
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/90332341" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    (function () {
+        if (window.location.hash) {
+            document.getElementById('checkout').addEventListener('shown.bs.modal', function (event) {
+                const urlParams = new URLSearchParams(window.location.search);
+
+                console.log(urlParams.get('service'));
+
+                if (urlParams.get('service') === "spoty") {
+                    console.log(document.getElementById('spotyTab'));
+                    document.getElementById('spotyTab').click();
+                }
+
+                if (urlParams.get('email')) {
+                    document.getElementById('ytEmail').value = urlParams.get('email');
+                }
+            });
+
+            new bootstrap.Modal(document.querySelector(window.location.hash)).show();
+        }
+
+        document.getElementById('ytForm').onsubmit = function (e) {
+            const email = document.getElementById('ytEmail').value;
+            axios.get(`https://activations.ddostup.ru/get-sign?out_sum=149.9&shp_service_name=yt&shp_user_mail=${email}`).then(response => {
+                document.getElementById('hiddenYtEmail').value = email;
+                document.getElementById('ytSignature').value = response.data.sign;
+
+                e.target.submit();
+            });
+            e.preventDefault();
+        }
+    })();
+</script>
+</body>
+
+</html>
