@@ -27,6 +27,8 @@ const UI = {
     },
 
     keyInput(event) {
+        console.log('Sieg');
+
         if (!rfb) return;
     
         const newValue = event.target.value;
@@ -85,22 +87,6 @@ const UI = {
             UI.lastKeyboardinput = newValue;
         }
     },
-
-    onfocusVirtualKeyboard(event) {
-        document.getElementById('noVNC_keyboard_button')
-            .classList.add("noVNC_selected");
-        if (rfb) {
-            rfb.focusOnClick = false;
-        }
-    },
-    
-    onblurVirtualKeyboard(event) {
-        document.getElementById('noVNC_keyboard_button')
-            .classList.remove("noVNC_selected");
-        if (rfb) {
-            rfb.focusOnClick = true;
-        }
-    },
     
     keyEvent(keysym, code, down) {
         if (!rfb) return;
@@ -119,6 +105,13 @@ const UI = {
                     .addEventListener('submit', () => false);
         }
         window.touchKeyboard._target.focus();
+
+        document.getElementById('noVNC_keyboard_button')
+        .classList.add("noVNC_selected");
+        document.getElementById('noVNC_keyboard_button').innerText = 'Убрать клавиатуру';
+        if (rfb) {
+            rfb.focusOnClick = false;
+        }
     },
 
     hideVirtualKeyboard() {
@@ -127,6 +120,13 @@ const UI = {
         const input = document.getElementById('noVNC_keyboardinput');
 
         if (document.activeElement != input) return;
+
+        document.getElementById('noVNC_keyboard_button')
+        .classList.remove("noVNC_selected");
+        document.getElementById('noVNC_keyboard_button').innerText = 'Клавиатура';
+        if (rfb) {
+            rfb.focusOnClick = true;
+        }
 
         input.blur();
     },
@@ -140,4 +140,9 @@ function toggleVirtualKeyboard() {
         UI.showVirtualKeyboard();
     }
 }
+
+if (window.isTouchDevice) {
+    document.getElementById('noVNC_keyboard_button').style.display = "inline-block";
+}
+
 
